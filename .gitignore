@@ -8,4 +8,4 @@ node_modules/
 /playwright/.auth/
 .env
 .prettierrc
-/test-data/users.json
+test-data/users.json
