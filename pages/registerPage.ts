@@ -1,6 +1,8 @@
 import { expect, type Locator, type Page } from '@playwright/test';
+import { faker } from '@faker-js/faker';
+import fs from 'fs';
 
-export class Register {
+export class RegisterPage {
   readonly page: Page;
 
   //Locators
@@ -35,30 +37,46 @@ export class Register {
 
   //Methods
 
-  async newRegistration(
-    fillFirstName: string,
-    fillLastName: string,
-    fillYearOfBirth: string,
-    fillStreet: string,
-    fillPostalCode: string,
-    fillCity: string,
-    fillState: string,
-    selectCountry: string,
-    fillPhone: string,
-    fillEmail: string,
-    fillPassword: string,
-  ) {
-    await this.firstName.fill(fillFirstName);
-    await this.lastName.fill(fillLastName);
+  randomPassword() {
+    const letters = faker.string.alphanumeric(8);
+    const special = faker.helpers.arrayElement(['@', '#', '$']);
+    const number = faker.string.numeric(2);
+
+    return letters + special + number;
+  }
+
+  async newRegistration(fillYearOfBirth: string, fillStreet: string, fillPostalCode: string, fillCity: string, fillState: string, selectCountry: string) {
+    const randomPassword = this.randomPassword();
+    const randomFirstName = faker.person.firstName();
+    const randomLastName = faker.person.lastName();
+    const randomPhoneNumber = faker.string.numeric(10);
+    const randomEmail = faker.internet.email();
+
+    await this.firstName.fill(randomFirstName);
+    await this.lastName.fill(randomLastName);
     await this.yearOfBirth.fill(fillYearOfBirth);
     await this.street.fill(fillStreet);
     await this.postalCode.fill(fillPostalCode);
     await this.city.fill(fillCity);
     await this.state.fill(fillState);
     await this.country.selectOption(selectCountry);
-    await this.phone.fill(fillPhone);
-    await this.emailAddress.fill(fillEmail);
-    await this.password.fill(fillPassword);
+    await this.phone.fill(randomPhoneNumber);
+    await this.emailAddress.fill(randomEmail);
+    await this.password.fill(randomPassword);
+
+    const user = {
+      email: randomEmail,
+      password: randomPassword,
+    };
+
+    const filePath = './test-data/users.json';
+    const users = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+    users.push(user);
+
+    fs.writeFileSync(filePath, JSON.stringify(users, null, 2));
+
+    return user;
   }
 
   async goto() {
