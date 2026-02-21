@@ -9,6 +9,7 @@ export class SingInPage {
   readonly email: Locator;
   readonly password: Locator;
   readonly loginButton: Locator;
+  readonly invalidEmailPasswordError: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,6 +19,7 @@ export class SingInPage {
     this.email = this.page.getByPlaceholder('Your email');
     this.password = this.page.getByPlaceholder('Your password');
     this.loginButton = this.page.getByRole('button', { name: 'Login' });
+    this.invalidEmailPasswordError = this.page.getByAltText('Invalid email or password');
   }
 
   //actions

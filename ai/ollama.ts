@@ -7,7 +7,6 @@ export async function askOllama(prompt: string) {
       prompt,
       stream: false,
 
-      // 🔥 CRITICAL SETTINGS
       options: {
         temperature: 0, // no creativity
         top_p: 0.9,

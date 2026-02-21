@@ -26,6 +26,12 @@ class AIReporter implements Reporter {
   }
 
   async onEnd() {
+    const aiEnabled = process.env.AI_ENABLED === 'true';
+
+    if (!aiEnabled) {
+      console.log('\n🛑 AI analysis disabled\n');
+      return;
+    }
     if (this.failedTests.length === 0) {
       console.log('\n✅ All tests passed. No AI analysis needed.\n');
       return;
