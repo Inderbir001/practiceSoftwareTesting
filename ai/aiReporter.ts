@@ -1,5 +1,5 @@
 import type { FullConfig, Suite, TestCase, TestResult, Reporter } from '@playwright/test/reporter';
-import { askOllama } from './ai/ollama';
+import { askOllama } from './ollama';
 
 class AIReporter implements Reporter {
   private failedTests: {

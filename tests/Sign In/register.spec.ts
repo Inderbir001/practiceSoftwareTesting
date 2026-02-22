@@ -1,6 +1,6 @@
 import { expect, test, type Page, type Locator } from '@playwright/test';
-import { RegisterPage } from '../../pages/registerPage';
-import { SingInPage } from '../../pages/singInPage';
+import { RegisterPage } from '../../pages/sign_In_Page/registerPage';
+import { SingInPage } from '../../pages/sign_In_Page/singInPage';
 
 test('New Registration', async ({ page }) => {
   const registerPage = new RegisterPage(page);

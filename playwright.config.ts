@@ -16,7 +16,7 @@ export default defineConfig({
   reporter: [
     ['list'], // terminal output
     ['html', { open: 'on-failure' }], // open only when test fails
-    ['./aiReporter.ts'], // AI failure analyzer
+    ['./ai/aiReporter.ts'], // AI failure analyzer
   ],
 
   // Shared settings
