@@ -4,7 +4,6 @@ import { HomePage } from '../../pages/homePage';
 import { RegisterPage } from '../../pages/sign_In_Page/registerPage';
 import { ForgotYourPassword } from '../../pages/sign_In_Page/forgotPassword';
 import { BasePage } from '../../base/basePage';
-import { base } from '@faker-js/faker';
 
 let signInPage: SingInPage;
 let homePage: HomePage;
@@ -25,7 +24,6 @@ test.beforeEach('Goto Sign In page before all tests', async ({ page }) => {
   await homePage.signInLink.click();
 });
 
-// this test is only valid if register.spec.ts was ran recently
 test('Sign in', async ({ page }) => {
   await signInPage.fillsignInDetails('customer@practicesoftwaretesting.com', 'welcome01');
   await signInPage.loginButton.click();
