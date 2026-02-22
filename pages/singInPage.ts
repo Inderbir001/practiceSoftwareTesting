@@ -10,6 +10,9 @@ export class SingInPage {
   readonly password: Locator;
   readonly loginButton: Locator;
   readonly invalidEmailPasswordError: Locator;
+  readonly passwordLengthIsInvalid: Locator;
+  readonly emailFormatIsInvalid: Locator;
+  readonly eyeIcon: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,7 +22,10 @@ export class SingInPage {
     this.email = this.page.getByPlaceholder('Your email');
     this.password = this.page.getByPlaceholder('Your password');
     this.loginButton = this.page.getByRole('button', { name: 'Login' });
-    this.invalidEmailPasswordError = this.page.getByAltText('Invalid email or password');
+    this.invalidEmailPasswordError = this.page.getByText('Invalid email or password');
+    this.passwordLengthIsInvalid = this.page.getByText('Password length is invalid');
+    this.emailFormatIsInvalid = this.page.getByText('Email format is invalid');
+    this.eyeIcon = this.page.locator('button:has(svg[data-icon="eye"])');
   }
 
   //actions

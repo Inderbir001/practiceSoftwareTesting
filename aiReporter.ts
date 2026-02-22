@@ -9,7 +9,7 @@ class AIReporter implements Reporter {
   }[] = [];
 
   onTestEnd(test: TestCase, result: TestResult) {
-    if (result.status === 'failed') {
+    if (['failed', 'timedOut', 'interrupted'].includes(result.status)) {
       const errorMessage = result.error?.message || '';
       const stack = result.error?.stack?.split('\n').slice(0, 6).join('\n') || '';
 
@@ -62,15 +62,11 @@ Stack: ${f.stack}
 Respond STRICTLY in this format:
 
 ROOT CAUSE:
-<1-2 lines max>
 
 WHY IT FAILED:
-<1-2 lines max>
 
 FIX:
-<short actionable fix in 1-2 lines>
 
-Keep total response under 12 lines.
 Be direct. No explanations outside the format.
 `;
     try {
