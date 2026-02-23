@@ -1,6 +1,6 @@
 import { expect, test, type Page, type Locator } from '@playwright/test';
-import { RegisterPage } from '../../pages/sign_In_Page/registerPage';
-import { SingInPage } from '../../pages/sign_In_Page/singInPage';
+import { RegisterPage } from '../../src/pages/auth/registerPage';
+import { SingInPage } from '../../src/pages/auth/singInPage';
 
 let registerPage: RegisterPage;
 let signInPage: SingInPage;

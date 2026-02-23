@@ -1,97 +1,330 @@
-# Playwright AI-Powered Test Automation Framework
+# 🚀 Playwright AI-Powered Test Automation Framework
 
-This repository contains an advanced test automation framework built with Playwright and TypeScript for end-to-end testing of https://practicesoftwaretesting.com (https://github.com/testsmith-io/practice-software-testing). It includes a robust set of features designed for reliability, maintainability, and innovative failure analysis.
+An advanced end-to-end automation framework built using **Playwright + TypeScript**, enhanced with **AI-powered failure analysis via Ollama**.
 
-## Features
+This project demonstrates how modern automation can evolve beyond simple pass/fail reporting into an intelligent, self-diagnostic testing system.
 
-- **Page Object Model (POM):** The framework is structured using the Page Object Model to create a clean, maintainable, and reusable test codebase.
-- **Cross-Browser Testing:** Tests are configured to run across major browsers (Chromium, Firefox, WebKit) to ensure wide application compatibility.
-- **CI/CD Integration:** Includes a pre-configured GitHub Actions workflow for continuous integration, automatically running tests on pushes and pull requests to the `main` branch.
-- **Advanced Failure Reporting:** Generates detailed HTML reports, screenshots, and video recordings for failed tests to simplify debugging.
-- **AI-Powered Failure Analysis:** A unique, custom Playwright reporter that uses a local AI model (via Ollama) to analyze test failures and provide a root cause analysis, saving significant debugging time.
+🔗 **Application Under Test:**
+[https://practicesoftwaretesting.com](https://practicesoftwaretesting.com)
 
-## Tech Stack
+🔗 **Source Repository:**
+[https://github.com/testsmith-io/practice-software-testing](https://github.com/testsmith-io/practice-software-testing)
 
-- **Framework:** [Playwright](https://playwright.dev/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Test Data Generation:** [@faker-js/faker](https://fakerjs.dev/)
-- **Environment Variables:** [dotenv](https://github.com/motdotla/dotenv)
-- **CI/CD:** [GitHub Actions](https://github.com/features/actions)
-- **AI Integration:** [Ollama](https://ollama.ai/)
+---
 
-## Getting Started
+## 📌 Why This Framework?
 
-### Prerequisites
+Traditional automation tells you what failed.
+This framework goes further — it helps explain _why_ it failed.
 
-- [Node.js](https://nodejs.org/en/) (LTS version recommended)
-- [Git](https://git-scm.com/)
+It was designed to:
 
-### Installation
+- ✅ Reduce manual debugging time
+- ✅ Provide automated root cause analysis
+- ✅ Suggest potential fixes using AI
+- ✅ Maintain scalable and clean architecture
+- ✅ Demonstrate CI/CD-ready automation practices
 
-1.  **Clone the repository:**
+This is a next-generation QA framework combining structured automation + AI intelligence.
 
-    ```bash
-    git clone https://github.com/Inderbir001/practiceSoftwareTesting.git
-    cd practiceSoftwareTesting
-    ```
+---
 
-2.  **Install dependencies:**
+## 🏗 Architecture & Project Structure
 
-    ```bash
-    npm install
-    ```
+The framework follows the **Page Object Model (POM)** pattern and modular design principles.
 
-3.  **Install Playwright browsers:**
-    ```bash
-    npx playwright install --with-deps
-    ```
+```
+.
+├── src/
+│   ├── ai/
+│   │   ├── aiReporter.ts
+│   │   └── ollamaClient.ts
+│   │
+│   ├── pages/
+│   │   ├── base/
+│   │   │   └── basePage.ts
+│   │   │
+│   │   ├── auth/
+│   │   │   ├── signInPage.ts
+│   │   │   ├── registerPage.ts
+│   │   │   └── forgotPasswordPage.ts
+│   │   │
+│   │   ├── categories/
+│   │   └── home/
+│   │
+│   ├── utils/
+│   │   └── testData.ts
+│
+├── tests/
+│   └── auth/
+│
+├── test-data/
+│   └── users.json
+│
+├── playwright.config.ts
+├── .env
+└── README.md
+```
 
-## Running the Tests
+### Design Principles
 
-To run the entire test suite, use the following command:
+- Separation of concerns
+- Modular AI integration
+- Reusable page methods
+- Environment-driven configuration
+- Scalable folder structure
+
+---
+
+## ✨ Key Features
+
+### 🧱 Page Object Model (POM)
+
+- Clean abstraction of UI elements
+- High maintainability
+- Reusable components
+
+---
+
+### 🌍 Cross-Browser Testing
+
+Configured to run on:
+
+- Chromium
+- Firefox
+- WebKit
+
+Ensures compatibility across major browsers.
+
+---
+
+### ⚙ CI/CD Integration
+
+- GitHub Actions workflow included
+- Runs on push & pull requests
+- Generates test artifacts automatically
+
+---
+
+### 📊 Advanced Reporting
+
+- HTML reports
+- Screenshots on failure
+- Video recordings
+- Trace viewer support
+
+Open report with:
+
+```bash
+npx playwright show-report
+```
+
+---
+
+### 🤖 AI-Powered Failure Analysis
+
+A custom Playwright reporter integrates with a local Ollama model to:
+
+- Capture failed test details
+- Send structured prompt to AI
+- Receive root cause analysis
+- Suggest potential fixes
+- Print intelligent diagnostics in terminal
+
+---
+
+## 🧠 How AI Failure Analysis Works
+
+```
+Test Fails
+   ↓
+Custom Reporter Captures:
+   - Error message
+   - Stack trace
+   - Test title
+   ↓
+Prompt Sent to Ollama
+   ↓
+AI Analyzes Failure
+   ↓
+Root Cause + Suggested Fix
+   ↓
+Displayed in Terminal
+```
+
+This significantly reduces debugging effort and improves issue resolution speed.
+
+---
+
+## 🛠 Tech Stack
+
+| Category               | Technology       |
+| ---------------------- | ---------------- |
+| Framework              | Playwright       |
+| Language               | TypeScript       |
+| Test Data              | @faker-js/faker  |
+| Environment Management | dotenv           |
+| CI/CD                  | GitHub Actions   |
+| AI Integration         | Ollama           |
+| AI Model               | qwen2.5-coder:7b |
+
+---
+
+## ⚙ Prerequisites
+
+- Node.js (LTS recommended)
+- Git
+- Ollama (for AI feature)
+
+---
+
+## 📥 Installation
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Inderbir001/practiceSoftwareTesting.git
+cd practiceSoftwareTesting
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Install Playwright Browsers
+
+```bash
+npx playwright install --with-deps
+```
+
+---
+
+## ▶ Running Tests
+
+### 🔹 Run All Tests
 
 ```bash
 npx playwright test
 ```
 
-You can also run tests in specific browsers or in headed mode:
+### 🔹 Run Registration Tests Only
 
-- **Run on a specific browser:**
+```bash
+npx playwright test --grep @registration
+```
 
-  ```bash
-  npx playwright test --project=chromium
-  ```
+### 🔹 Run Regression Tests Only
 
-- **Run in headed mode:**
-  ```bash
-  npx playwright test --headed
-  ```
+```bash
+npx playwright test --grep @regression
+```
 
-After the test run is complete, an HTML report will be generated in the `playwright-report` directory.
+### 🔹 Run on Specific Browser
 
-## AI Failure Analysis
+```bash
+npx playwright test --project=chromium
+```
 
-This project includes a custom reporter that sends failed test information to a local Ollama instance for analysis.
+### 🔹 Run in Headed Mode
 
-### How it Works
+```bash
+npx playwright test --headed
+```
 
-1.  When a test fails, the reporter collects the error message and stack trace.
-2.  It sends this information in a carefully crafted prompt to a running Ollama instance.
-3.  The AI's response, containing a root cause analysis and a suggested fix, is printed directly to the console.
+---
 
-### Configuration
+## 📈 Test Reports
 
-1.  **Install and run Ollama:** Follow the instructions on the [Ollama website](https://ollama.ai/) to set it up on your local machine.
+After execution:
 
-2.  **Pull the model:** This project is configured to use the `qwen2.5-coder:7b` model.
+- HTML Report → `playwright-report/`
+- Videos → `test-results/`
+- Traces → Playwright Trace Viewer
 
-    ```bash
-    ollama pull qwen2.5-coder:7b
-    ```
+To open report:
 
-3.  **Enable the AI Reporter:** The reporter is controlled by an environment variable. To enable it, create a `.env` file in the root of the project:
-    ```
-    AI_ENABLED=true
-    ```
+```bash
+npx playwright show-report
+```
 
-When you run the tests with this variable set, you will see the AI analysis in the terminal output for any failed tests.
+---
+
+## 🤖 Enabling AI Failure Reporter
+
+### 1️⃣ Install Ollama
+
+Follow setup instructions at:
+[https://ollama.ai/](https://ollama.ai/)
+
+### 2️⃣ Pull Required Model
+
+```bash
+ollama pull qwen2.5-coder:7b
+```
+
+### 3️⃣ Enable AI via Environment Variable
+
+Create a `.env` file in the project root:
+
+```
+AI_ENABLED=true
+```
+
+When enabled:
+
+- AI analyzes failed tests
+- Root cause and suggestions appear in terminal
+- Feature can be toggled without changing code
+
+To disable:
+
+```
+AI_ENABLED=false
+```
+
+---
+
+## 🔐 Environment Variables
+
+| Variable   | Description                               |
+| ---------- | ----------------------------------------- |
+| AI_ENABLED | Enables or disables AI reporter           |
+| BASE_URL   | Application base URL (optional extension) |
+
+---
+
+## 🔮 Future Enhancements
+
+- Self-healing locators
+- AI-based flaky test detection
+- Smart test generator agent
+- Slack/email failure notifications
+- Dockerized execution
+- Cloud grid integration
+
+---
+
+## 👨‍💻 Author
+
+**Inderbir Singh**
+Automation Test Engineer
+Focused on building scalable, intelligent QA systems.
+
+---
+
+## ⭐ Summary
+
+This framework demonstrates:
+
+- Advanced Playwright usage
+- Custom reporter implementation
+- AI integration in automation
+- Clean modular architecture
+- CI/CD readiness
+- Scalable enterprise design
+
+It reflects the transition from traditional automation to **AI-augmented QA engineering**.
+
+---

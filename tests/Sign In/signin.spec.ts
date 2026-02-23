@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { SingInPage } from '../../pages/sign_In_Page/singInPage';
-import { HomePage } from '../../pages/homePage';
-import { RegisterPage } from '../../pages/sign_In_Page/registerPage';
-import { ForgotYourPassword } from '../../pages/sign_In_Page/forgotPassword';
-import { BasePage } from '../../base/basePage';
+import { SingInPage } from '../../src/pages/auth/singInPage';
+import { HomePage } from '../../src/pages/home/homePage';
+import { RegisterPage } from '../../src/pages/auth/registerPage';
+import { ForgotYourPassword } from '../../src/pages/auth/forgotPassword';
+import { BasePage } from '../../src/pages/base/basePage';
 
 let signInPage: SingInPage;
 let homePage: HomePage;

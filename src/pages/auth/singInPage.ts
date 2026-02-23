@@ -1,5 +1,5 @@
 import { expect, type Locator, type Page } from '@playwright/test';
-import { BasePage } from '../../base/basePage';
+import { BasePage } from '../base/basePage';
 
 export class SingInPage {
   readonly page: Page;
