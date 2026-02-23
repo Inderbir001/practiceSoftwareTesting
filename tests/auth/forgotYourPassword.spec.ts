@@ -4,7 +4,6 @@ import { HomePage } from '../../src/pages/home/homePage';
 import { RegisterPage } from '../../src/pages/auth/registerPage';
 import { ForgotYourPassword } from '../../src/pages/auth/forgotPassword';
 import { BasePage } from '../../src/pages/base/basePage';
-import { base } from '@faker-js/faker';
 
 let signInPage: SingInPage;
 let homePage: HomePage;
@@ -12,7 +11,7 @@ let registerPage: RegisterPage;
 let forgotYourPasswordPage: ForgotYourPassword;
 let basePage: BasePage;
 
-test.describe('Regression Cases', { tag: '@regression' }, () => {
+test.describe('Forgot Your password Regression Cases', { tag: '@regression' }, () => {
   test.beforeEach('Goto Sign In page before all tests', async ({ page }) => {
     signInPage = new SingInPage(page);
     homePage = new HomePage(page);

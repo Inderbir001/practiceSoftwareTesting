@@ -11,7 +11,7 @@ let registerPage: RegisterPage;
 let forgotYourPasswordPage: ForgotYourPassword;
 let basePage: BasePage;
 
-test.describe('Regression Cases', { tag: '@regression' }, () => {
+test.describe('Sign in page Regression Cases', { tag: '@regression' }, () => {
   test.beforeEach('Goto Sign In page before all tests', async ({ page }) => {
     signInPage = new SingInPage(page);
     homePage = new HomePage(page);
