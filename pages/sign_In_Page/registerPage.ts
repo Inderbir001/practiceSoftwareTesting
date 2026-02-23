@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import fs from 'fs';
+import fs from 'node:fs';
 
 export class RegisterPage {
   readonly page: Page;
@@ -18,6 +18,17 @@ export class RegisterPage {
   readonly emailAddress: Locator;
   readonly password: Locator;
   readonly registerButton: Locator;
+  readonly firstNameIsRequired: Locator;
+  readonly lastNameIsRequired: Locator;
+  readonly dobError: Locator;
+  readonly streetRequired: Locator;
+  readonly postalCodeRequired: Locator;
+  readonly stateRequired: Locator;
+  readonly cityRequired: Locator;
+  readonly countryRequired: Locator;
+  readonly phoneRequired: Locator;
+  readonly emailRequired: Locator;
+  readonly passwordErrorValidation: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,6 +44,17 @@ export class RegisterPage {
     this.emailAddress = this.page.locator('#email');
     this.password = this.page.locator('#password');
     this.registerButton = this.page.getByRole('button', { name: 'Register' });
+    this.firstNameIsRequired = this.page.getByText('First name is required');
+    this.lastNameIsRequired = this.page.getByText('Last name is required');
+    this.dobError = this.page.getByText('Please enter a valid date in YYYY-MM-DD format.\nDate of Birth is required');
+    this.streetRequired = this.page.getByText('Street is required');
+    this.postalCodeRequired = this.page.getByText('Postcode is required');
+    this.cityRequired = this.page.getByText('City is required');
+    this.stateRequired = this.page.getByText('State is required');
+    this.countryRequired = this.page.getByText('Country is required');
+    this.phoneRequired = this.page.getByText('Phone is required.');
+    this.emailRequired = this.page.getByText('Email is required');
+    this.passwordErrorValidation = this.page.getByText('Password is required\nPassword must be minimal 6 characters long.\nPassword must include invalid characters.');
   }
 
   //Methods

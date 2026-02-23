@@ -1,8 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
-import path from 'path';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
+// Recreate __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env file
+dotenv.config({
+  path: path.resolve(__dirname, '.env'),
+  quiet: true,
+});
 
 export default defineConfig({
   testDir: './tests',
@@ -13,16 +22,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // Reporters
-  reporter: [
-    ['list'], // terminal output
-    ['html', { open: 'on-failure' }], // open only when test fails
-    ['./ai/aiReporter.ts'], // AI failure analyzer
-  ],
+  reporter: [['list'], ['html', { open: 'on-failure' }], ['./ai/aiReporter.ts']],
 
   // Shared settings
   use: {
-    // baseURL: 'http://localhost:3000',
-
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -42,33 +45,8 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-
-    // Mobile (optional — uncomment if needed)
-    /*
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
-    */
-
-    // Branded browsers (optional)
-    /*
-    {
-      name: 'Microsoft Edge',
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    },
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    },
-    */
   ],
 
-  // Optional web server
   /*
   webServer: {
     command: 'npm run start',

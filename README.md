@@ -1,6 +1,6 @@
 # Playwright AI-Powered Test Automation Framework
 
-This repository contains an advanced test automation framework built with Playwright and TypeScript for end-to-end testing of https://practicesoftwaretesting.com. It includes a robust set of features designed for reliability, maintainability, and innovative failure analysis.
+This repository contains an advanced test automation framework built with Playwright and TypeScript for end-to-end testing of https://practicesoftwaretesting.com (https://github.com/testsmith-io/practice-software-testing). It includes a robust set of features designed for reliability, maintainability, and innovative failure analysis.
 
 ## Features
 
