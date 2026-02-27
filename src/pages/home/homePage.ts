@@ -7,6 +7,8 @@ export class HomePage {
   readonly sortOptions: Locator;
   readonly productPrices: Locator;
   readonly Co2Active: Locator;
+  readonly nextButtonOuter: Locator;
+  readonly nextButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +19,8 @@ export class HomePage {
     this.sortOptions = this.page.getByLabel('sort');
     this.productPrices = this.page.locator('[data-test="product-price"]');
     this.Co2Active = this.page.locator('.co2-letter.active');
+    this.nextButtonOuter = this.page.locator('.page-item');
+    this.nextButton = this.page.getByRole('button', { name: 'Next' });
   }
 
   async selectInSorting(sortingMethod: string) {
@@ -26,44 +30,92 @@ export class HomePage {
 
   async isCO2RatingEToA() {
     await this.selectInSorting('co2_rating,desc');
-    const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
-    const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b)).reverse();
-    expect(Co2Rating).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
+      const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b)).reverse();
+      expect(Co2Rating).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async isCO2RatingAToE() {
     await this.selectInSorting('co2_rating,asc');
-    const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
-    const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b));
-    expect(Co2Rating).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
+      const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b));
+      expect(Co2Rating).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async isNameAscending() {
     await this.selectInSorting('name,asc');
-    const names = (await this.allProductNamesOnFirstPage.allTextContents()).map((n) => n.trim());
-    const sorted = [...names].sort((a, b) => a.localeCompare(b));
-    expect(names).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const names = (await this.allProductNamesOnFirstPage.allTextContents()).map((n) => n.trim());
+      const sorted = [...names].sort((a, b) => a.localeCompare(b));
+      expect(names).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async isNameDescending() {
     await this.selectInSorting('name,desc');
-    const names = (await this.allProductNamesOnFirstPage.allTextContents()).map((n) => n.trim());
-    const sorted = [...names].sort((a, b) => a.localeCompare(b)).reverse();
-    expect(names).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const names = (await this.allProductNamesOnFirstPage.allTextContents()).map((n) => n.trim());
+      const sorted = [...names].sort((a, b) => a.localeCompare(b)).reverse();
+      expect(names).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async IsHighToLowPrice() {
     await this.selectInSorting('price,desc');
-    const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
-    const sorted = [...allPrices].sort((a, b) => a.localeCompare(b)).reverse();
-    expect(allPrices).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
+      const sorted = [...allPrices].sort((a, b) => a.localeCompare(b)).reverse();
+      expect(allPrices).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async IsLowToHighPrice() {
     await this.selectInSorting('price,asc');
-    const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
-    const sorted = [...allPrices].sort((a, b) => a.localeCompare(b));
-    expect(allPrices).toEqual(sorted);
+    await this.page.waitForLoadState('networkidle');
+    const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
+    while (true) {
+      const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
+      const sorted = [...allPrices].sort((a, b) => a.localeCompare(b));
+      expect(allPrices).toEqual(sorted);
+      if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
+        break;
+      }
+      await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
+    }
   }
 
   async goto() {
