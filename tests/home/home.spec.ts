@@ -39,4 +39,12 @@ test.describe('Home Page Regression Cases', { tag: '@regression' }, () => {
   test('Sorted : Price Low to High', async ({ page }) => {
     await homePage.IsLowToHighPrice();
   });
+
+  test('Sorted : CO2 Rating A - E ', async ({ page }) => {
+    await homePage.isCO2RatingAToE();
+  });
+
+  test('Sorted : CO2 Rating E -A ', async ({ page }) => {
+    await homePage.isCO2RatingEToA();
+  });
 });

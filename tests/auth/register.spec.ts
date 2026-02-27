@@ -11,7 +11,7 @@ test.beforeEach('Goto Registration Page before every test', async ({ page }) => 
   await registerPage.goto();
 });
 
-test.describe('Registration', { tag: '@registration' }, () => {
+test.describe('Registration', { tag: '@register' }, () => {
   test('New Registration', async ({ page }) => {
     const user = await registerPage.newRegistration('2002-11-25', 'Test Street', '123456', 'Test City', 'test State', 'India');
 

@@ -6,6 +6,7 @@ export class HomePage {
   readonly allProductNamesOnFirstPage: Locator;
   readonly sortOptions: Locator;
   readonly productPrices: Locator;
+  readonly Co2Active: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,11 +16,26 @@ export class HomePage {
     this.allProductNamesOnFirstPage = this.page.locator('.card-title');
     this.sortOptions = this.page.getByLabel('sort');
     this.productPrices = this.page.locator('[data-test="product-price"]');
+    this.Co2Active = this.page.locator('.co2-letter.active');
   }
 
   async selectInSorting(sortingMethod: string) {
     await this.sortOptions.selectOption(sortingMethod);
     await this.page.waitForLoadState('networkidle');
+  }
+
+  async isCO2RatingEToA() {
+    await this.selectInSorting('co2_rating,desc');
+    const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
+    const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b)).reverse();
+    expect(Co2Rating).toEqual(sorted);
+  }
+
+  async isCO2RatingAToE() {
+    await this.selectInSorting('co2_rating,asc');
+    const Co2Rating = (await this.Co2Active.allTextContents()).map((n) => n.trim());
+    const sorted = [...Co2Rating].sort((a, b) => a.localeCompare(b));
+    expect(Co2Rating).toEqual(sorted);
   }
 
   async isNameAscending() {
