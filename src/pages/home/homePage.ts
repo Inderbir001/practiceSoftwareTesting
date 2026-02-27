@@ -28,7 +28,7 @@ export class HomePage {
     await this.page.waitForLoadState('networkidle');
   }
 
-  async isCO2RatingEToA() {
+  async verifyCO2Descending() {
     await this.selectInSorting('co2_rating,desc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
@@ -43,7 +43,7 @@ export class HomePage {
     }
   }
 
-  async isCO2RatingAToE() {
+  async verifyCO2Ascending() {
     await this.selectInSorting('co2_rating,asc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
@@ -58,7 +58,7 @@ export class HomePage {
     }
   }
 
-  async isNameAscending() {
+  async verifyNameAscending() {
     await this.selectInSorting('name,asc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
@@ -73,7 +73,7 @@ export class HomePage {
     }
   }
 
-  async isNameDescending() {
+  async verifyNameDescending() {
     await this.selectInSorting('name,desc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
@@ -88,13 +88,13 @@ export class HomePage {
     }
   }
 
-  async IsHighToLowPrice() {
+  async verifyPriceHighToLow() {
     await this.selectInSorting('price,desc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
     while (true) {
-      const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
-      const sorted = [...allPrices].sort((a, b) => a.localeCompare(b)).reverse();
+      const allPrices = (await this.productPrices.allTextContents()).map((n) => parseFloat(n.replace('$', '').trim()));
+      const sorted = [...allPrices].sort((a, b) => b - a);
       expect(allPrices).toEqual(sorted);
       if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
         break;
@@ -102,14 +102,14 @@ export class HomePage {
       await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
     }
   }
-
-  async IsLowToHighPrice() {
+  
+  async verifyPriceLowToHigh() {
     await this.selectInSorting('price,asc');
     await this.page.waitForLoadState('networkidle');
     const nextPageItem = this.nextButtonOuter.filter({ has: this.nextButton });
     while (true) {
-      const allPrices = (await this.productPrices.allTextContents()).map((n) => n.trim());
-      const sorted = [...allPrices].sort((a, b) => a.localeCompare(b));
+      const allPrices = (await this.productPrices.allTextContents()).map((n) => parseFloat(n.replace('$', '').trim()));
+      const sorted = [...allPrices].sort((a, b) => a - b);
       expect(allPrices).toEqual(sorted);
       if ((await nextPageItem.getAttribute('class'))?.includes('disabled')) {
         break;
