@@ -9,3 +9,5 @@ node_modules/
 .env
 .prettierrc
 test-data/users.json
+allure-results/
+allure-report/

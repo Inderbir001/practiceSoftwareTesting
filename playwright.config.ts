@@ -22,7 +22,19 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // Reporters
-  reporter: [['list'], ['html', { open: 'on-failure' }], ['./ai/aiReporter.ts']],
+  reporter: [
+    ['list'],
+    ['html', { open: 'on-failure' }],
+    ['./ai/aiReporter.ts'],
+    [
+      'allure-playwright',
+      {
+        outputFolder: 'allure-results',
+        detail: true,
+        suiteTitle: false,
+      },
+    ],
+  ],
 
   // Shared settings
   use: {
