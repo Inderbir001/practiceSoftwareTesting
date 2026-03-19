@@ -1,7 +1,7 @@
 import { expect, type Locator, type Page } from '@playwright/test';
 import { BasePage } from '../base/basePage';
 
-export class SingInPage {
+export class SignInPage {
   readonly page: Page;
   readonly basePage: BasePage;
 

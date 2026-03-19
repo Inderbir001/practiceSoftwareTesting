@@ -102,7 +102,7 @@ export class HomePage {
       await Promise.all([this.page.waitForResponse((resp) => resp.url().includes('/products?page=') && resp.status() === 200), this.nextButton.click()]);
     }
   }
-  
+
   async verifyPriceLowToHigh() {
     await this.selectInSorting('price,asc');
     await this.page.waitForLoadState('networkidle');
